@@ -268,7 +268,9 @@
     font-weight: 600;
     color: #374151;
     margin-bottom: 0.5rem;
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .modern-form-control {
@@ -284,6 +286,7 @@
     border-color: #667eea;
     box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.1);
     background: white;
+    transform: translateY(-1px);
 }
 
 .modern-form-control.is-invalid {
@@ -343,6 +346,41 @@
     font-weight: 500;
 }
 
+/* Answer Options Styling */
+.answer-option {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+
+.answer-option.border-success::after {
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #10b981;
+    font-size: 1rem;
+}
+
+/* Question Form Specific Styles */
+
+.modern-form-body .row + .row {
+    margin-top: 0;
+}
+
+.modern-form-body .modern-form-group:last-of-type {
+    margin-bottom: 0;
+}
+
+.modern-form-label .badge {
+    flex-shrink: 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
 /* Animations */
 @keyframes fadeInUp {
     from {
@@ -353,6 +391,25 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+@keyframes correctAnswer {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.answer-option.border-success {
+    border-color: #10b981 !important;
+    background: rgba(16, 185, 129, 0.05);
+    box-shadow: 0 0 0 0.2rem rgba(16, 185, 129, 0.1);
+    animation: correctAnswer 0.4s ease-out;
 }
 
 .modern-card,

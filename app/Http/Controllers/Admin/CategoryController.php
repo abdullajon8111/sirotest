@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Services\QuestionImportService;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -64,5 +65,37 @@ class CategoryController extends Controller
 
         return redirect()->route('admin.categories.index')
                         ->with('success', 'Kategoriya muvaffaqiyatli o\'chirildi.');
+    }
+    
+    public function import(Request $request, Category $category)
+    {
+        $request->validate([
+            'docx_file' => 'required|file|mimes:docx|max:10240' // Max 10MB
+        ]);
+        
+        try {
+            $file = $request->file('docx_file');
+            $tempPath = $file->getPathname();
+            
+            $importService = new QuestionImportService();
+            $result = $importService->importFromDocx($tempPath, $category->id);
+            
+            if ($result['success']) {
+                return redirect()->route('admin.categories.show', $category)
+                    ->with('success', $result['message'])
+                    ->with('import_details', [
+                        'imported' => $result['imported_count'],
+                        'errors' => $result['errors']
+                    ]);
+            } else {
+                return redirect()->route('admin.categories.show', $category)
+                    ->with('error', $result['message'])
+                    ->with('import_errors', $result['errors']);
+            }
+            
+        } catch (\Exception $e) {
+            return redirect()->route('admin.categories.show', $category)
+                ->with('error', 'Import xatoligi: ' . $e->getMessage());
+        }
     }
 }

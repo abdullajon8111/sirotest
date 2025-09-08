@@ -26,6 +26,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     
     // Categories
     Route::resource('categories', CategoryController::class, ['as' => 'admin']);
+    Route::post('categories/{category}/import', [CategoryController::class, 'import'])->name('admin.categories.import');
     
     // Questions
     Route::resource('questions', QuestionController::class, ['as' => 'admin']);
