@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.purpose-admin')
 
 @section('title', 'Dashboard')
 @section('description', 'Tizim statistikalari va tezkor ma\'lumotlar')
@@ -25,13 +25,15 @@
         left: 0;
         right: 0;
         height: 4px;
-        background: var(--gradient);
+        /* дефолтный градиент */
+        background: linear-gradient(135deg, #667eea, #764ba2);
     }
-    .stat-card.users::before { --gradient: linear-gradient(135deg, #667eea, #764ba2); }
-    .stat-card.categories::before { --gradient: linear-gradient(135deg, #10b981, #059669); }
-    .stat-card.questions::before { --gradient: linear-gradient(135deg, #f59e0b, #d97706); }
-    .stat-card.tests::before { --gradient: linear-gradient(135deg, #3b82f6, #1d4ed8); }
-    
+    /* индивидуальные градиенты для полоски сверху */
+    .stat-card.users::before { background: linear-gradient(135deg, #667eea, #764ba2); }
+    .stat-card.categories::before { background: linear-gradient(135deg, #10b981, #059669); }
+    .stat-card.questions::before { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .stat-card.tests::before { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+
     .stat-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
@@ -45,7 +47,7 @@
     .stat-card.categories .stat-number { color: #10b981; }
     .stat-card.questions .stat-number { color: #f59e0b; }
     .stat-card.tests .stat-number { color: #3b82f6; }
-    
+
     .stat-title {
         font-size: 1.1rem;
         font-weight: 600;
@@ -70,7 +72,7 @@
     .stat-card.categories .stat-icon { background: linear-gradient(135deg, #10b981, #059669); }
     .stat-card.questions .stat-icon { background: linear-gradient(135deg, #f59e0b, #d97706); }
     .stat-card.tests .stat-icon { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
-    
+
     .modern-card {
         background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(20px);

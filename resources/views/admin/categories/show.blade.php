@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.purpose-admin')
 
 @section('title', 'Kategoriya - ' . $category->name)
 @section('page-title', 'Kategoriya Ma\'lumotlari')

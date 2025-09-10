@@ -1,7 +1,7 @@
 @extends('layouts.purpose-admin')
 
 @section('title', 'Yangi Savol')
-@section('description', 'Yangi savol yaratish')
+@section('description', 'Test savoli yaratish')
 
 @section('content')
 <div class="purpose-form-container purpose-fade-in">
@@ -76,7 +76,8 @@
                     <div class="col-md-6">
                         <div class="purpose-form-group">
                             <label for="option_a" class="purpose-form-label d-flex align-items-center">
-                                <span class="purpose-badge purpose-badge-primary me-2">A</span> Birinchi variant <span class="purpose-required">*</span>
+                                <span class="purpose-badge purpose-badge-primary me-2">A</span> 
+                                Birinchi variant <span class="purpose-required">*</span>
                             </label>
                             <input type="text" class="purpose-form-control answer-option @error('option_a') is-invalid @enderror" 
                                    id="option_a" name="option_a" value="{{ old('option_a') }}" required 
@@ -89,7 +90,8 @@
                     <div class="col-md-6">
                         <div class="purpose-form-group">
                             <label for="option_b" class="purpose-form-label d-flex align-items-center">
-                                <span class="purpose-badge purpose-badge-info me-2">B</span> Ikkinchi variant <span class="purpose-required">*</span>
+                                <span class="purpose-badge purpose-badge-info me-2">B</span> 
+                                Ikkinchi variant <span class="purpose-required">*</span>
                             </label>
                             <input type="text" class="purpose-form-control answer-option @error('option_b') is-invalid @enderror" 
                                    id="option_b" name="option_b" value="{{ old('option_b') }}" required 
@@ -105,7 +107,8 @@
                     <div class="col-md-6">
                         <div class="purpose-form-group">
                             <label for="option_c" class="purpose-form-label d-flex align-items-center">
-                                <span class="purpose-badge purpose-badge-warning me-2">C</span> Uchinchi variant <span class="purpose-required">*</span>
+                                <span class="purpose-badge purpose-badge-warning me-2">C</span> 
+                                Uchinchi variant <span class="purpose-required">*</span>
                             </label>
                             <input type="text" class="purpose-form-control answer-option @error('option_c') is-invalid @enderror" 
                                    id="option_c" name="option_c" value="{{ old('option_c') }}" required 
@@ -118,7 +121,8 @@
                     <div class="col-md-6">
                         <div class="purpose-form-group">
                             <label for="option_d" class="purpose-form-label d-flex align-items-center">
-                                <span class="purpose-badge purpose-badge-success me-2">D</span> To'rtinchi variant <span class="purpose-required">*</span>
+                                <span class="purpose-badge purpose-badge-success me-2">D</span> 
+                                To'rtinchi variant <span class="purpose-required">*</span>
                             </label>
                             <input type="text" class="purpose-form-control answer-option @error('option_d') is-invalid @enderror" 
                                    id="option_d" name="option_d" value="{{ old('option_d') }}" required 
@@ -158,21 +162,71 @@
 @endsection
 
 @section('scripts')
+<style>
+/* Custom styles for answer options */
+.answer-option {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.answer-option.correct-answer {
+    border-color: #2dce89 !important;
+    background: rgba(45, 206, 137, 0.05);
+    box-shadow: 0 0 0 3px rgba(45, 206, 137, 0.1);
+}
+
+.answer-option.correct-answer::after {
+    content: '\f00c';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #2dce89;
+    font-size: 1rem;
+    animation: checkmarkBounce 0.4s ease-out;
+}
+
+@keyframes checkmarkBounce {
+    0% { transform: translateY(-50%) scale(0); }
+    50% { transform: translateY(-50%) scale(1.2); }
+    100% { transform: translateY(-50%) scale(1); }
+}
+
+.purpose-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    min-width: 24px;
+    text-align: center;
+}
+
+.purpose-badge-info {
+    background: rgba(17, 205, 239, 0.1);
+    color: #11cdef;
+}
+</style>
+
 <script>
 $(document).ready(function() {
-    // To'g'ri javob rangini o'zgartirish
+    // To'g'ri javob ko'rsatkich
     $('#correct_answer').on('change', function() {
         const options = ['option_a', 'option_b', 'option_c', 'option_d'];
         const selectedAnswer = $(this).val();
         
-        // Barcha optionlardan success classni olib tashlash
+        // Barcha optionlardan correct-answer classini olib tashlash
         options.forEach(option => {
-            $('#' + option).removeClass('border-success');
+            $('#' + option).removeClass('correct-answer');
         });
         
-        // Tanlangan optionga success class qo'shish
+        // Tanlangan optionga correct-answer class qo'shish
         if (selectedAnswer) {
-            $('#option_' + selectedAnswer).addClass('border-success');
+            $('#option_' + selectedAnswer).addClass('correct-answer');
+            
+            // Success notification
+            showNotification('To\'g\'ri javob ' + selectedAnswer.toUpperCase() + ' variant sifatida belgilandi', 'success');
         }
     });
     
@@ -187,21 +241,24 @@ $(document).ready(function() {
         };
         const correctAnswer = $('#correct_answer').val();
         
-        // Tekshirish
+        // Basic validation
         if (!question || !options.a || !options.b || !options.c || !options.d || !correctAnswer) {
             e.preventDefault();
-            alert('Iltimos, barcha maydonlarni to\'ldiring!');
+            showNotification('Iltimos, barcha majburiy maydonlarni to\'ldiring!', 'danger');
             return false;
         }
         
-        // Variantlarni tekshirish
+        // Check for duplicate options
         const optionValues = Object.values(options);
         const uniqueOptions = [...new Set(optionValues)];
         if (uniqueOptions.length !== optionValues.length) {
             e.preventDefault();
-            alert('Barcha variantlar turlicha bo\'lishi kerak!');
+            showNotification('Barcha variantlar turlicha bo\'lishi kerak!', 'warning');
             return false;
         }
+        
+        // Success feedback
+        showNotification('Savol saqlanmoqda...', 'info');
     });
     
     // Auto-resize textarea
@@ -210,13 +267,84 @@ $(document).ready(function() {
         this.style.height = (this.scrollHeight) + 'px';
     });
     
-    // Placeholder dinamik o'zgartirish
+    // Dynamic placeholder for category
     $('#category_id').on('change', function() {
         const categoryName = $(this).find('option:selected').text();
         if (categoryName && categoryName !== 'Kategoriyani tanlang') {
             $('#question').attr('placeholder', categoryName + ' bo\'yicha savol matnini kiriting...');
         }
     });
+    
+    // Character counters
+    addCharacterCounter('#question', 500);
+    addCharacterCounter('#option_a', 100);
+    addCharacterCounter('#option_b', 100);
+    addCharacterCounter('#option_c', 100);
+    addCharacterCounter('#option_d', 100);
 });
+
+// Helper functions
+function showNotification(message, type) {
+    // Create notification element
+    const notification = $(`
+        <div class="purpose-alert purpose-alert-${type} purpose-alert-icon position-fixed" 
+             style="top: 2rem; right: 2rem; z-index: 9999; max-width: 350px; animation: slideInRight 0.3s ease-out;">
+            <i class="fas fa-${getAlertIcon(type)}"></i>
+            <div>${message}</div>
+        </div>
+    `);
+    
+    // Add to page
+    $('body').append(notification);
+    
+    // Auto-remove after 3 seconds
+    setTimeout(() => {
+        notification.style.animation = 'slideOutRight 0.3s ease-in';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
+}
+
+function getAlertIcon(type) {
+    const icons = {
+        success: 'check-circle',
+        danger: 'exclamation-circle',
+        warning: 'exclamation-triangle',
+        info: 'info-circle'
+    };
+    return icons[type] || 'info-circle';
+}
+
+function addCharacterCounter(selector, maxLength) {
+    const element = $(selector);
+    const counter = $(`<small class="purpose-text-muted d-block mt-1">0 / ${maxLength} belgi</small>`);
+    element.parent().append(counter);
+    
+    element.on('input', function() {
+        const length = this.value.length;
+        counter.text(`${length} / ${maxLength} belgi`);
+        counter.removeClass('purpose-text-danger purpose-text-warning');
+        
+        if (length > maxLength * 0.9) {
+            counter.addClass('purpose-text-warning');
+        }
+        if (length >= maxLength) {
+            counter.addClass('purpose-text-danger');
+        }
+    });
+}
+
+// Add slide animations
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideInRight {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    @keyframes slideOutRight {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+    }
+`;
+document.head.appendChild(style);
 </script>
 @endsection

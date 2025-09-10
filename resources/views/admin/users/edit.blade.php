@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.purpose-admin')
 
 @section('title', 'Foydalanuvchini tahrirlash')
 

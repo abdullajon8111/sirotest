@@ -1,60 +1,62 @@
-@extends('layouts.admin')
+@extends('layouts.purpose-admin')
 
 @section('title', 'Yangi Kategoriya')
 @section('description', 'Yangi kategoriya yaratish')
 
 @section('content')
-<div class="modern-form-container">
-    <div class="modern-form-card">
-        <div class="modern-form-header">
-            <i class="fas fa-folder-plus fa-2x mb-3"></i>
-            <h1 class="modern-form-title">Yangi Kategoriya Yaratish</h1>
-            <p class="modern-form-subtitle mb-0">Test kategoriyasi uchun ma'lumotlarni kiriting</p>
+<div class="purpose-form-container purpose-fade-in">
+    <div class="purpose-form-card">
+        <div class="purpose-form-header">
+            <div class="purpose-form-icon">
+                <i class="fas fa-folder-plus"></i>
+            </div>
+            <h1 class="purpose-form-title">Yangi Kategoriya Yaratish</h1>
+            <p class="purpose-form-subtitle">Test kategoriyasi uchun ma'lumotlarni kiriting</p>
         </div>
         
-        <div class="modern-form-body">
+        <div class="purpose-form-body">
             <form method="POST" action="{{ route('admin.categories.store') }}">
                 @csrf
 
-                <div class="modern-form-group">
-                    <label for="name" class="modern-form-label">
-                        Kategoriya nomi <span class="required-indicator">*</span>
+                <div class="purpose-form-group">
+                    <label for="name" class="purpose-form-label">
+                        Kategoriya nomi <span class="purpose-required">*</span>
                     </label>
-                    <input type="text" class="form-control modern-form-control @error('name') is-invalid @enderror" 
+                    <input type="text" class="purpose-form-control @error('name') is-invalid @enderror" 
                            id="name" name="name" value="{{ old('name') }}" required 
                            placeholder="Masalan: Matematika">
                     @error('name')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="purpose-invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
-                <div class="modern-form-group">
-                    <label for="description" class="modern-form-label">Tavsif</label>
-                    <textarea class="form-control modern-form-control @error('description') is-invalid @enderror" 
+                <div class="purpose-form-group">
+                    <label for="description" class="purpose-form-label">Tavsif</label>
+                    <textarea class="purpose-form-control @error('description') is-invalid @enderror" 
                               id="description" name="description" rows="4" 
                               placeholder="Kategoriya haqida qisqacha ma'lumot">{{ old('description') }}</textarea>
                     @error('description')
-                        <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="purpose-invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
-                <div class="modern-check">
+                <div class="purpose-checkbox">
                     <div class="d-flex align-items-center">
-                        <input class="modern-check-input form-check-input" type="checkbox" id="is_active" name="is_active" value="1" 
+                        <input class="purpose-checkbox-input" type="checkbox" id="is_active" name="is_active" value="1" 
                                {{ old('is_active', true) ? 'checked' : '' }}>
-                        <label class="modern-check-label" for="is_active">
+                        <label class="purpose-checkbox-label" for="is_active">
                             <strong>Faol kategoriya</strong>
-                            <br><small class="text-muted">Bu kategoriya testlarda ishlatilishi mumkin</small>
+                            <br><small class="purpose-text-muted">Bu kategoriya testlarda ishlatilishi mumkin</small>
                         </label>
                     </div>
                 </div>
 
-                <div class="modern-form-actions">
-                    <a href="{{ route('admin.categories.index') }}" class="modern-btn modern-btn-secondary">
+                <div class="purpose-form-actions">
+                    <a href="{{ route('admin.categories.index') }}" class="purpose-btn purpose-btn-secondary">
                         <i class="fas fa-arrow-left"></i>
                         Orqaga
                     </a>
-                    <button type="submit" class="modern-btn modern-btn-success">
+                    <button type="submit" class="purpose-btn purpose-btn-success">
                         <i class="fas fa-save"></i>
                         Saqlash
                     </button>

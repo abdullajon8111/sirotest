@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.purpose-admin')
 
 @section('title', 'Kategoriya Tahrirlash')
 @section('description', 'Kategoriyani tahrirlash')
