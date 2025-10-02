@@ -1,61 +1,168 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Test Sinovlarini O'tkazish Tizimi - Loyiha Tavsifi
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## 📋 Umumiy Ma'lumot
 
-## About Laravel
+Men sizga Laravel + Bootstrap asosida **Test Sinovlarini O'tkazish Tizimi**ni ishlab chiqib berdim. Bu tizim admin panel va foydalanuvchi interfeysi bilan to'liq kompleks echimdir.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🎯 Bajarilgan Vazifalar
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### ✅ Admin Panel Imkoniyatlari:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. **Savol kategoriyalari (CRUD)**:
+    - Kategoriya qo'shish, o'zgartirish, o'chirish
+    - Har bir kategoriya faol/nofaol holatini boshqarish
 
-## Learning Laravel
+2. **Savollar (CRUD)**:
+    - Kategoriya bo'yicha savollar yaratish
+    - Har bir savol uchun 4 ta variant (a, b, c, d)
+    - To'g'ri javobni belgilash imkoniyati
+    - Savollarni tahrirlash va o'chirish
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+3. **Test yaratish**:
+    - Qaysi kategoriyadan nechta savol olinishini aniqlash
+    - Test davomiyligini belgilash (daqiqalarda)
+    - Test boshlanish va tugash vaqtini o'rnatish
+    - Maksimal urinishlar sonini belgilash
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+4. **Foydalanuvchilar boshqaruvi (CRUD)**:
+    - Ism, familiya, email, parol kiritish
+    - Foydalanuvchini faol/nofaol qilish
+    - Admin va oddiy foydalanuvchi huquqlarini boshqarish
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### ✅ Foydalanuvchi Interfeysi:
 
-## Laravel Sponsors
+1. **Autentifikatsiya**:
+    - Login-parol orqali kirish tizimi
+    - Admin va foydalanuvchi huquqlari bo'yicha ajratish
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+2. **Test olish**:
+    - Savollar **random tartibda** chiqadi
+    - Har bir savol variantlari ham **random** tartibda ko'rsatiladi
+    - Real-time **timer** (vaqt hisoblash)
+    - AJAX orqali javoblarni avtomatik saqlash
 
-### Premium Partners
+3. **Test tugashi**:
+    - Foydalanuvchi o'zi testni yakunlashi mumkin
+    - Vaqt tugaganda **avtomatik yakunlanadi**
+    - Test tugagandan so'ng batafsil hisobot
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+4. **Natijalar ko'rish**:
+    - Nechta to'g'ri javob
+    - Nechta noto'g'ri javob
+    - Nechta belgilangan savol
+    - Nechta belgilanmagan savol
+    - Har bir savolga qaysi javob berilgani batafsil ko'rsatiladi
 
-## Contributing
+5. **Logout tugmasi**: Tizimdan chiqish imkoniyati
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### ✅ Qo'shimcha Shartlar:
 
-## Code of Conduct
+- **Urinishlar soni**: Admin tomonidan har bir test uchun foydalanuvchi necha marta urinish qilishi mumkinligi belgilanadi
+- **Vaqt nazorati**: Timer orqali vaqt tugaganda avtomatik yakunlanish
+- **Random savollar**: Har safar turli tartibda savollar chiqishi
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🛠 Texnik Xususiyatlar
 
-## Security Vulnerabilities
+### Backend:
+- **Laravel 11** - PHP framework
+- **SQLite** database (MySQL ham qo'llab-quvvatlanadi)
+- **Eloquent ORM** - ma'lumotlar bazasi bilan ishlash
+- **Custom Middleware** - admin va foydalanuvchi huquqlarini nazorat qilish
+- **AJAX API** - real-time javoblarni saqlash
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Frontend:
+- **Bootstrap 5.1.3** - responsive dizayn
+- **jQuery** - JavaScript interaktivligi
+- **Font Awesome 6** - ikonkalar
+- **Real-time Timer** - JavaScript timer
+- **CSRF Protection** - xavfsizlik
 
-## License
+### Database Strukturasi:
+- **Categories** - test kategoriyalari
+- **Questions** - savollar va variantlar
+- **Tests** - test konfiguratsiyalari
+- **Users** - foydalanuvchilar
+- **Test_Results** - test natijalari
+- **User_Test_Attempts** - foydalanuvchi urinishlarini nazorat qilish
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🔧 O'rnatish va Ishga Tushirish
+
+```bash
+# 1. Dependencies o'rnatish
+composer install
+
+# 2. Environment sozlash  
+php artisan key:generate
+
+# 3. Database yaratish va ma'lumotlarni to'ldirish
+php artisan migrate --seed
+
+# 4. Server ishga tushirish
+php artisan serve
+```
+
+## 👥 Test Ma'lumotlari
+
+Tizim avtomatik ravishda quyidagi test hisoblarini yaratadi:
+
+**Admin:**
+- Email: admin@test.uz
+- Parol: 12345678
+
+**Foydalanuvchi:**
+- Email: user@test.uz
+- Parol: 12345678
+
+## 🎨 Interfeys
+
+### Admin Panel:
+- Professional sidebar navigation
+- Statistika dashboard
+- CRUD operatsiyalar uchun to'liq interface
+- Responsive dizayn
+
+### Foydalanuvchi:
+- Zamonaviy card-based dizayn
+- Intuitiv test olish interfeysi
+- Real-time timer va progress
+- Batafsil natijalar sahifasi
+
+## 📊 Asosiy Funksiyalar
+
+### Test Tizimi:
+1. **Random Questions**: Har safar boshqa tartibda savollar
+2. **Random Options**: Variantlar ham aralashtirilib chiqadi
+3. **Timer**: Vaqt tugaganda avtomatik tugatish
+4. **Auto-save**: Javoblar real-time saqlanadi
+5. **Attempts Control**: Urinishlar sonini nazorat qilish
+6. **Detailed Results**: Har bir javob uchun batafsil natija
+
+### Admin Funksiyalar:
+1. **Complete CRUD**: Barcha ma'lumotlarni boshqarish
+2. **Statistics**: Dashboard orqali statistikalar
+3. **User Management**: Foydalanuvchilarni boshqarish
+4. **Test Configuration**: Murakkab test sozlamalari
+
+## 🔒 Xavfsizlik
+
+- **Role-based Access Control**: Admin va User huquqlari
+- **CSRF Protection**: Laravel himoyasi
+- **Input Validation**: Barcha ma'lumotlar tekshiriladi
+- **Secure Authentication**: Bcrypt password hashing
+- **Route Protection**: Middleware himoyasi
+
+## ✨ Natija
+
+Tizim to'liq **profesional darajada** ishlab chiqilgan bo'lib, sizning barcha talablaringizni qondiradi:
+
+- ✅ Admin va foydalanuvchi interfeyslari
+- ✅ CRUD operatsiyalar
+- ✅ Random savollar va variantlar
+- ✅ Timer va avtomatik tugatish
+- ✅ Batafsil natijalar
+- ✅ Urinishlar nazorati
+- ✅ Responsive dizayn
+- ✅ Xavfsizlik choralari
+- ✅ Professional kod sifati
+
+Tizim Laravel va Bootstrap texnologiyalari yordamida zamonaviy standartlar asosida yaratilgan va ishlatishga tayyor!

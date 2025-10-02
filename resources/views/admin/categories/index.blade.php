@@ -5,18 +5,19 @@
 
 @section('content')
 <div class="d-flex justify-content-between align-items-center mb-4">
-    <div class="d-flex justify-content-between align-items-center">
-        <h1 class="purpose-header-title">
+    <div>
+        <h1 class="purpose-header-title mb-1">
             <i class="fas fa-folder me-3"></i>Kategoriyalar
         </h1>
-        <a href="{{ route('admin.categories.create') }}" class="purpose-btn purpose-btn-primary">
-            <i class="fas fa-plus me-2"></i>Yangi kategoriya
-        </a>
+        <p class="purpose-text-muted">Test kategoriyalarini boshqarish va tahrirlash</p>
     </div>
+    <a href="{{ route('admin.categories.create') }}" class="purpose-btn purpose-btn-primary">
+        <i class="fas fa-plus me-2"></i>Yangi kategoriya
+    </a>
 </div>
 
 <div class="purpose-card purpose-fade-in">
-    <div class="card-body p-0">
+    <div class="purpose-card-body p-0">
         @if($categories->count() > 0)
             <div class="table-responsive">
                 <table class="table purpose-table mb-0">
@@ -44,11 +45,11 @@
                                 </td>
                                 <td>
                                     @if($category->is_active)
-                                        <span class="purpose-badge purpose-badge-success text-white">
+                                        <span class="purpose-badge purpose-badge-success">
                                             <i class="fas fa-check me-1"></i>Faol
                                         </span>
                                     @else
-                                        <span class="purpose-badge purpose-badge-danger text-white">
+                                        <span class="purpose-badge purpose-badge-danger">
                                             <i class="fas fa-times me-1"></i>Nofaol
                                         </span>
                                     @endif
@@ -57,7 +58,7 @@
                                     <span class="text-muted">{{ $category->created_at->format('d.m.Y') }}</span>
                                 </td>
                                 <td>
-                                    <div class="d-flex align-items-center">
+                                    <div class="purpose-table-actions">
                                         <a href="{{ route('admin.categories.show', $category) }}" 
                                            class="purpose-action-btn purpose-action-btn-primary" title="Ko'rish">
                                             <i class="fas fa-eye"></i>
@@ -84,11 +85,11 @@
             </div>
         @else
             <div class="text-center py-5">
-                <div class="text-center py-5-icon">
-                    <i class="fas fa-folder-open"></i>
+                <div class="mb-4">
+                    <i class="fas fa-folder-open" style="font-size: 4rem; color: #e5e7eb;"></i>
                 </div>
-                <h3 class="text-center py-5-title">Hozircha kategoriyalar yo'q</h3>
-                <p class="text-center py-5-description">Birinchi kategoriyani yaratish uchun quyidagi tugmani bosing</p>
+                <h3 class="purpose-text-muted mb-3">Hozircha kategoriyalar yo'q</h3>
+                <p class="purpose-text-muted mb-4">Birinchi kategoriyani yaratish uchun quyidagi tugmani bosing</p>
                 <a href="{{ route('admin.categories.create') }}" class="purpose-btn purpose-btn-primary">
                     <i class="fas fa-plus me-2"></i>Birinchi kategoriyani yarating
                 </a>

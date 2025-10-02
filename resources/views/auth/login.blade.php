@@ -4,111 +4,209 @@
 
 @section('content')
 <style>
+    body {
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow-x: hidden;
+        height: 100vh;
+    }
+    
+    .container, .container-fluid, .row {
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: none !important;
+        width: 100% !important;
+    }
     .login-container {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         min-height: 100vh;
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Chap tomon - Branding qismi */
+    .login-brand-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        flex: 1;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 2rem 0;
+        position: relative;
+        overflow: hidden;
+        padding: 2rem;
     }
-    .login-card {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(20px);
-        border-radius: 1.5rem;
-        border: none;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        max-width: 420px;
-        width: 100%;
+    
+    /* O'ng tomon - Login forma qismi */
+    .login-form-section {
+        flex: 1;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        min-height: 100vh;
     }
-    .login-header {
+    
+    .brand-content {
         text-align: center;
-        padding: 2rem 2rem 1rem;
+        color: white;
+        z-index: 2;
+        max-width: 400px;
     }
-    .login-logo {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        width: 80px;
-        height: 80px;
+    
+    .brand-logo {
+        width: 120px;
+        height: 120px;
+        background: rgba(255, 255, 255, 0.2);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 1rem;
-        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        margin: 0 auto 2rem;
+        backdrop-filter: blur(20px);
+        border: 2px solid rgba(255, 255, 255, 0.3);
     }
-    .login-title {
-        background: linear-gradient(135deg, #667eea, #764ba2);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+    
+    .brand-title {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .brand-subtitle {
+        font-size: 1.25rem;
+        font-weight: 300;
+        opacity: 0.9;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+    }
+    
+    .brand-features {
+        text-align: left;
+        margin-top: 2rem;
+    }
+    
+    .feature-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+    }
+    
+    .feature-item i {
+        width: 24px;
+        height: 24px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+        font-size: 0.875rem;
+    }
+    
+    .login-card {
+        width: 100%;
+        max-width: 400px;
+        background: white;
+        border-radius: 0;
+        box-shadow: none;
+        border: none;
+    }
+    
+    .login-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    
+    .login-welcome {
+        font-size: 2rem;
         font-weight: 700;
-        font-size: 1.75rem;
+        color: #1f2937;
         margin-bottom: 0.5rem;
     }
-    .login-form {
-        padding: 0 2rem 2rem;
+    
+    .login-subtitle {
+        color: #6b7280;
+        margin-bottom: 0;
     }
-    .form-floating {
+    .form-group {
         margin-bottom: 1.5rem;
     }
-    .form-control {
-        border: 2px solid #e2e8f0;
-        border-radius: 0.75rem;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(10px);
-        font-size: 0.95rem;
-        padding: 1rem 1rem;
-        transition: all 0.2s ease;
+    
+    .form-label {
+        color: #374151;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        display: block;
     }
+    
+    .form-control {
+        border: 1px solid #d1d5db;
+        border-radius: 0.5rem;
+        background: #f9fafb;
+        font-size: 1rem;
+        padding: 0.875rem 1rem;
+        transition: all 0.2s ease;
+        width: 100%;
+    }
+    
     .form-control:focus {
         border-color: #667eea;
-        box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         background: white;
+        outline: none;
     }
-    .form-label {
-        color: #64748b;
-        font-weight: 500;
-        margin-bottom: 0.5rem;
-    }
+    
     .login-btn {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         border: none;
-        border-radius: 0.75rem;
-        padding: 1rem;
+        border-radius: 0.5rem;
+        padding: 0.875rem 2rem;
         font-weight: 600;
         font-size: 1rem;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        width: 100%;
+        color: white;
     }
+    
     .login-btn:hover {
         background: linear-gradient(135deg, #5a67d8 0%, #553c9a 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        color: white;
     }
+    
     .form-check {
         margin-bottom: 1.5rem;
     }
+    
     .form-check-input:checked {
         background-color: #667eea;
         border-color: #667eea;
     }
     .test-credentials {
-        background: linear-gradient(135deg, #f8fafc, #e2e8f0);
-        border-radius: 1rem;
+        background: #f8fafc;
+        border: 1px solid #e5e7eb;
+        border-radius: 0.5rem;
         padding: 1.5rem;
-        margin-top: 1.5rem;
-        border: 1px solid #e2e8f0;
+        margin-top: 2rem;
     }
+    
     .credential-item {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0.5rem 0;
-        border-bottom: 1px solid #e2e8f0;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #e5e7eb;
     }
+    
     .credential-item:last-child {
         border-bottom: none;
     }
+    
+    /* Floating shapes chap tomonda */
     .floating-shapes {
         position: absolute;
         top: 0;
@@ -117,63 +215,135 @@
         height: 100%;
         overflow: hidden;
         pointer-events: none;
+        z-index: 1;
     }
+    
     .shape {
         position: absolute;
         background: rgba(255, 255, 255, 0.1);
         border-radius: 50%;
-        animation: float 6s ease-in-out infinite;
+        animation: float 8s ease-in-out infinite;
     }
+    
     @keyframes float {
-        0%, 100% { transform: translateY(0px) rotate(0deg); }
-        50% { transform: translateY(-20px) rotate(180deg); }
+        0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.1; }
+        50% { transform: translateY(-30px) rotate(180deg); opacity: 0.2; }
     }
+    
     .shape:nth-child(1) {
-        width: 60px;
-        height: 60px;
-        top: 10%;
+        width: 80px;
+        height: 80px;
+        top: 15%;
         left: 10%;
         animation-delay: 0s;
     }
+    
     .shape:nth-child(2) {
+        width: 120px;
+        height: 120px;
+        top: 60%;
+        right: 15%;
+        animation-delay: 3s;
+    }
+    
+    .shape:nth-child(3) {
+        width: 60px;
+        height: 60px;
+        bottom: 20%;
+        left: 30%;
+        animation-delay: 6s;
+    }
+    
+    .shape:nth-child(4) {
         width: 40px;
         height: 40px;
-        top: 20%;
-        right: 10%;
+        top: 35%;
+        left: 70%;
         animation-delay: 2s;
     }
-    .shape:nth-child(3) {
-        width: 80px;
-        height: 80px;
-        bottom: 10%;
-        left: 20%;
-        animation-delay: 4s;
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .login-container {
+            flex-direction: column;
+        }
+        
+        .login-brand-section {
+            min-height: 40vh;
+            padding: 1.5rem;
+        }
+        
+        .login-form-section {
+            min-height: 60vh;
+            padding: 1.5rem;
+        }
+        
+        .brand-title {
+            font-size: 2rem;
+        }
+        
+        .brand-subtitle {
+            font-size: 1rem;
+        }
+        
+        .brand-features {
+            display: none;
+        }
     }
 </style>
 
 <div class="login-container">
-    <div class="floating-shapes">
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
-    
-    <div class="login-card">
-        <div class="login-header">
-            <div class="login-logo">
-                <i class="fas fa-graduation-cap fa-2x text-white"></i>
-            </div>
-            <h1 class="login-title">Test Tizimi</h1>
-            <p class="text-muted mb-0">Hisobingizga kirish</p>
+    <!-- Chap tomon - Branding qismi -->
+    <div class="login-brand-section">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
         </div>
         
-        <div class="login-form">
+        <div class="brand-content">
+            <div class="brand-logo">
+                <i class="fas fa-graduation-cap fa-3x"></i>
+            </div>
+            
+            <h1 class="brand-title">Test Tizimi</h1>
+            <p class="brand-subtitle">Zamonaviy test va baholash platformasi. Bilimlaringizni sinab ko'ring va o'z darajangizni aniqlang.</p>
+            
+            <div class="brand-features">
+                <div class="feature-item">
+                    <i class="fas fa-check"></i>
+                    <span>Interaktiv testlar</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Natijalarni tahlil qilish</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Vaqt bilan cheklanish</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-trophy"></i>
+                    <span>Yutuqlar tizimi</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- O'ng tomon - Login forma qismi -->
+    <div class="login-form-section">
+        <div class="login-card">
+            <div class="login-header">
+                <h1 class="login-welcome">Xush kelibsiz</h1>
+                <p class="login-subtitle">Hisobingizga kirish uchun ma'lumotlaringizni kiriting</p>
+            </div>
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
-                <div class="mb-3">
+                <div class="form-group">
                     <label for="email" class="form-label">
-                        <i class="fas fa-envelope me-2 text-muted"></i>Email manzil
+                        <i class="fas fa-envelope me-2"></i>Email manzil
                     </label>
                     <input type="email" class="form-control @error('email') is-invalid @enderror" 
                            id="email" name="email" value="{{ old('email') }}" 
@@ -185,9 +355,9 @@
                     @enderror
                 </div>
 
-                <div class="mb-3">
+                <div class="form-group">
                     <label for="password" class="form-label">
-                        <i class="fas fa-lock me-2 text-muted"></i>Parol
+                        <i class="fas fa-lock me-2"></i>Parol
                     </label>
                     <input type="password" class="form-control @error('password') is-invalid @enderror" 
                            id="password" name="password" placeholder="parolingizni kiriting" required>
@@ -201,16 +371,14 @@
                 <div class="form-check">
                     <input type="checkbox" class="form-check-input" id="remember" name="remember" 
                            {{ old('remember') ? 'checked' : '' }}>
-                    <label class="form-check-label text-muted" for="remember">
+                    <label class="form-check-label" for="remember">
                         Meni eslab qol
                     </label>
                 </div>
 
-                <div class="d-grid">
-                    <button type="submit" class="btn login-btn text-white">
-                        <i class="fas fa-sign-in-alt me-2"></i>Kirish
-                    </button>
-                </div>
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt me-2"></i>Kirish
+                </button>
             </form>
 
             <div class="test-credentials">

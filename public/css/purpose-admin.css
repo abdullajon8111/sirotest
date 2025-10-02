@@ -756,12 +756,23 @@ body {
    BADGES & STATUS INDICATORS
    ======================================== */
 .purpose-badge {
+    display: inline-flex;
     padding: 0.25rem 0.75rem;
     border-radius: 0.25rem;
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+}
+
+.purpose-badge i {
+    display: flex;
+    margin: auto 0;
+}
+
+.purpose-badge.text-white {
+    --bs-text-opacity: 0;
+    color: #5e72e4 !important;
 }
 
 .purpose-badge-primary {
@@ -782,6 +793,11 @@ body {
 .purpose-badge-danger {
     background: rgba(245, 54, 92, 0.1);
     color: var(--bs-danger);
+}
+
+.purpose-badge-info {
+    background: rgba(17, 205, 239, 0.1);
+    color: var(--bs-info);
 }
 
 .purpose-badge-secondary {
