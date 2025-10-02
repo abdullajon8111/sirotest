@@ -10,7 +10,7 @@
         overflow-x: hidden;
         height: 100vh;
     }
-    
+
     .container, .container-fluid, .row {
         margin: 0 !important;
         padding: 0 !important;
@@ -23,7 +23,7 @@
         margin: 0;
         padding: 0;
     }
-    
+
     /* Chap tomon - Branding qismi */
     .login-brand-section {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -35,7 +35,7 @@
         overflow: hidden;
         padding: 2rem;
     }
-    
+
     /* O'ng tomon - Login forma qismi */
     .login-form-section {
         flex: 1;
@@ -46,14 +46,14 @@
         padding: 2rem;
         min-height: 100vh;
     }
-    
+
     .brand-content {
         text-align: center;
         color: white;
         z-index: 2;
         max-width: 400px;
     }
-    
+
     .brand-logo {
         width: 120px;
         height: 120px;
@@ -66,14 +66,14 @@
         backdrop-filter: blur(20px);
         border: 2px solid rgba(255, 255, 255, 0.3);
     }
-    
+
     .brand-title {
         font-size: 3rem;
         font-weight: 800;
         margin-bottom: 1rem;
         text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     }
-    
+
     .brand-subtitle {
         font-size: 1.25rem;
         font-weight: 300;
@@ -81,19 +81,19 @@
         margin-bottom: 2rem;
         line-height: 1.6;
     }
-    
+
     .brand-features {
         text-align: left;
         margin-top: 2rem;
     }
-    
+
     .feature-item {
         display: flex;
         align-items: center;
         margin-bottom: 1rem;
         font-size: 1rem;
     }
-    
+
     .feature-item i {
         width: 24px;
         height: 24px;
@@ -105,7 +105,7 @@
         margin-right: 1rem;
         font-size: 0.875rem;
     }
-    
+
     .login-card {
         width: 100%;
         max-width: 400px;
@@ -114,19 +114,19 @@
         box-shadow: none;
         border: none;
     }
-    
+
     .login-header {
         text-align: center;
         margin-bottom: 2rem;
     }
-    
+
     .login-welcome {
         font-size: 2rem;
         font-weight: 700;
         color: #1f2937;
         margin-bottom: 0.5rem;
     }
-    
+
     .login-subtitle {
         color: #6b7280;
         margin-bottom: 0;
@@ -134,14 +134,14 @@
     .form-group {
         margin-bottom: 1.5rem;
     }
-    
+
     .form-label {
         color: #374151;
         font-weight: 600;
         margin-bottom: 0.5rem;
         display: block;
     }
-    
+
     .form-control {
         border: 1px solid #d1d5db;
         border-radius: 0.5rem;
@@ -151,14 +151,14 @@
         transition: all 0.2s ease;
         width: 100%;
     }
-    
+
     .form-control:focus {
         border-color: #667eea;
         box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
         background: white;
         outline: none;
     }
-    
+
     .login-btn {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         border: none;
@@ -170,18 +170,18 @@
         width: 100%;
         color: white;
     }
-    
+
     .login-btn:hover {
         background: linear-gradient(135deg, #5a67d8 0%, #553c9a 100%);
         transform: translateY(-1px);
         box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         color: white;
     }
-    
+
     .form-check {
         margin-bottom: 1.5rem;
     }
-    
+
     .form-check-input:checked {
         background-color: #667eea;
         border-color: #667eea;
@@ -193,7 +193,7 @@
         padding: 1.5rem;
         margin-top: 2rem;
     }
-    
+
     .credential-item {
         display: flex;
         justify-content: space-between;
@@ -201,11 +201,11 @@
         padding: 0.75rem 0;
         border-bottom: 1px solid #e5e7eb;
     }
-    
+
     .credential-item:last-child {
         border-bottom: none;
     }
-    
+
     /* Floating shapes chap tomonda */
     .floating-shapes {
         position: absolute;
@@ -217,19 +217,19 @@
         pointer-events: none;
         z-index: 1;
     }
-    
+
     .shape {
         position: absolute;
         background: rgba(255, 255, 255, 0.1);
         border-radius: 50%;
         animation: float 8s ease-in-out infinite;
     }
-    
+
     @keyframes float {
         0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.1; }
         50% { transform: translateY(-30px) rotate(180deg); opacity: 0.2; }
     }
-    
+
     .shape:nth-child(1) {
         width: 80px;
         height: 80px;
@@ -237,7 +237,7 @@
         left: 10%;
         animation-delay: 0s;
     }
-    
+
     .shape:nth-child(2) {
         width: 120px;
         height: 120px;
@@ -245,7 +245,7 @@
         right: 15%;
         animation-delay: 3s;
     }
-    
+
     .shape:nth-child(3) {
         width: 60px;
         height: 60px;
@@ -253,7 +253,7 @@
         left: 30%;
         animation-delay: 6s;
     }
-    
+
     .shape:nth-child(4) {
         width: 40px;
         height: 40px;
@@ -261,31 +261,31 @@
         left: 70%;
         animation-delay: 2s;
     }
-    
+
     /* Responsive Design */
     @media (max-width: 768px) {
         .login-container {
             flex-direction: column;
         }
-        
+
         .login-brand-section {
             min-height: 40vh;
             padding: 1.5rem;
         }
-        
+
         .login-form-section {
             min-height: 60vh;
             padding: 1.5rem;
         }
-        
+
         .brand-title {
             font-size: 2rem;
         }
-        
+
         .brand-subtitle {
             font-size: 1rem;
         }
-        
+
         .brand-features {
             display: none;
         }
@@ -301,15 +301,15 @@
             <div class="shape"></div>
             <div class="shape"></div>
         </div>
-        
+
         <div class="brand-content">
             <div class="brand-logo">
                 <i class="fas fa-graduation-cap fa-3x"></i>
             </div>
-            
+
             <h1 class="brand-title">Test Tizimi</h1>
             <p class="brand-subtitle">Zamonaviy test va baholash platformasi. Bilimlaringizni sinab ko'ring va o'z darajangizni aniqlang.</p>
-            
+
             <div class="brand-features">
                 <div class="feature-item">
                     <i class="fas fa-check"></i>
@@ -330,7 +330,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- O'ng tomon - Login forma qismi -->
     <div class="login-form-section">
         <div class="login-card">
@@ -345,8 +345,8 @@
                     <label for="email" class="form-label">
                         <i class="fas fa-envelope me-2"></i>Email manzil
                     </label>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" 
-                           id="email" name="email" value="{{ old('email') }}" 
+                    <input type="email" class="form-control @error('email') is-invalid @enderror"
+                           id="email" name="email" value="{{ old('email') }}"
                            placeholder="emailingizni kiriting" required autofocus>
                     @error('email')
                         <div class="invalid-feedback">
@@ -359,7 +359,7 @@
                     <label for="password" class="form-label">
                         <i class="fas fa-lock me-2"></i>Parol
                     </label>
-                    <input type="password" class="form-control @error('password') is-invalid @enderror" 
+                    <input type="password" class="form-control @error('password') is-invalid @enderror"
                            id="password" name="password" placeholder="parolingizni kiriting" required>
                     @error('password')
                         <div class="invalid-feedback">
@@ -369,7 +369,7 @@
                 </div>
 
                 <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="remember" name="remember" 
+                    <input type="checkbox" class="form-check-input" id="remember" name="remember"
                            {{ old('remember') ? 'checked' : '' }}>
                     <label class="form-check-label" for="remember">
                         Meni eslab qol
@@ -381,29 +381,32 @@
                 </button>
             </form>
 
-            <div class="test-credentials">
-                <div class="text-center mb-3">
-                    <h6 class="text-muted mb-0">
-                        <i class="fas fa-info-circle me-2"></i>Test ma'lumotlari
-                    </h6>
-                </div>
-                
-                <div class="credential-item">
-                    <div>
-                        <div class="fw-bold text-danger">Admin</div>
-                        <small class="text-muted">admin@test.uz</small>
+            @if(app()->isLocal())
+                <div class="test-credentials">
+                    <div class="text-center mb-3">
+                        <h6 class="text-muted mb-0">
+                            <i class="fas fa-info-circle me-2"></i>Test ma'lumotlari
+                        </h6>
                     </div>
-                    <code class="bg-light px-2 py-1 rounded">12345678</code>
-                </div>
-                
-                <div class="credential-item">
-                    <div>
-                        <div class="fw-bold text-primary">User</div>
-                        <small class="text-muted">user@test.uz</small>
+
+                    <div class="credential-item">
+                        <div>
+                            <div class="fw-bold text-danger">Admin</div>
+                            <small class="text-muted">admin@test.uz</small>
+                        </div>
+                        <code class="bg-light px-2 py-1 rounded">12345678</code>
                     </div>
-                    <code class="bg-light px-2 py-1 rounded">12345678</code>
+
+                    <div class="credential-item">
+                        <div>
+                            <div class="fw-bold text-primary">User</div>
+                            <small class="text-muted">user@test.uz</small>
+                        </div>
+                        <code class="bg-light px-2 py-1 rounded">12345678</code>
+                    </div>
                 </div>
-            </div>
+            @endif
+
         </div>
     </div>
 </div>
