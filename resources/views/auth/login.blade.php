@@ -381,7 +381,7 @@
                 </button>
             </form>
 
-            @if(app()->isLocal())
+            @if(! app()->isProduction())
                 <div class="test-credentials">
                     <div class="text-center mb-3">
                         <h6 class="text-muted mb-0">
