@@ -37,7 +37,7 @@
         width: 40px;
         height: 40px;
         border-radius: 0.5rem;
-        border: 1px solid var(--border-color);
+        border: 2px solid var(--border-color);
         background: white;
         display: flex;
         align-items: center;
@@ -47,23 +47,60 @@
         font-weight: 600;
         margin: 0.25rem;
         font-size: 0.875rem;
+        position: relative;
     }
     
     .question-item:hover {
         border-color: var(--primary-color);
         background: var(--surface-gray-100);
+        transform: scale(1.05);
     }
     
+    /* Javobsiz savollar - oq fon, kulrang border */
+    .question-item {
+        background: white;
+        border-color: #d1d5db;
+        color: #6b7280;
+    }
+    
+    /* Javob berilgan savollar - yashil */
     .question-item.answered {
-        background: var(--success-color);
-        border-color: var(--success-color);
-        color: white;
+        background: #10b981 !important;
+        border-color: #10b981 !important;
+        color: white !important;
     }
     
+    /* Hozirgi savol - ko'k */
     .question-item.current {
-        background: var(--primary-color);
-        border-color: var(--primary-color);
+        background: var(--primary-color) !important;
+        border-color: var(--primary-color) !important;
+        color: white !important;
+        box-shadow: 0 0 0 3px rgba(94, 114, 228, 0.3);
+    }
+    
+    /* Hozirgi savol va javob berilgan bo'lsa - ko'k ustunlik qiladi */
+    .question-item.current.answered {
+        background: var(--primary-color) !important;
+        border-color: var(--primary-color) !important;
+        position: relative;
+    }
+    
+    /* Javob berilgan holatni ko'rsatish uchun kichik belgi */
+    .question-item.answered:not(.current)::after {
+        content: '✓';
+        position: absolute;
+        bottom: -2px;
+        right: -2px;
+        background: #059669;
         color: white;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: bold;
     }
     
     .option-btn {
@@ -134,14 +171,34 @@
                                     'c' => $question['option_c'],
                                     'd' => $question['option_d']
                                 ];
-                                $shuffledKeys = array_keys($options);
-                                shuffle($shuffledKeys);
+                                // Get option values and shuffle them
+                                $optionValues = array_values($options);
+                                shuffle($optionValues);
+                                // Keep fixed labels but assign shuffled values
+                                $fixedLabels = ['a', 'b', 'c', 'd'];
+                                $shuffledOptions = array_combine($fixedLabels, $optionValues);
+                                // Find the correct key for selected answer based on original option text
+                                $selectedKey = null;
+                                if (isset($testResult->answers[$question['id']])) {
+                                    $selectedOriginalKey = $testResult->answers[$question['id']];
+                                    $selectedOptionText = $options[$selectedOriginalKey];
+                                    foreach ($shuffledOptions as $displayKey => $displayText) {
+                                        if ($displayText === $selectedOptionText) {
+                                            $selectedKey = $displayKey;
+                                            break;
+                                        }
+                                    }
+                                }
                             @endphp
                             
-                            @foreach($shuffledKeys as $key)
-                                <div class="option-btn {{ isset($testResult->answers[$question['id']]) && $testResult->answers[$question['id']] === $key ? 'selected' : '' }}" 
-                                     data-value="{{ $key }}" data-question-id="{{ $question['id'] }}">
-                                    <strong>{{ strtoupper($key) }})</strong> {{ $options[$key] }}
+                            @foreach($shuffledOptions as $displayKey => $optionText)
+                                @php
+                                    // Find the original key for this option text
+                                    $originalKey = array_search($optionText, $options);
+                                @endphp
+                                <div class="option-btn {{ $selectedKey === $displayKey ? 'selected' : '' }}" 
+                                     data-value="{{ $originalKey }}" data-question-id="{{ $question['id'] }}">
+                                    <strong>{{ strtoupper($displayKey) }})</strong> {{ $optionText }}
                                 </div>
                             @endforeach
                         </div>
@@ -151,9 +208,11 @@
                             <button type="button" class="user-btn user-btn-outline" id="prev-btn" {{ $index === 0 ? 'disabled' : '' }}>
                                 <i class="fas fa-chevron-left"></i>Oldingi
                             </button>
-                            <button type="button" class="user-btn user-btn-primary" id="next-btn" {{ $index === count($testResult->questions) - 1 ? 'disabled' : '' }}>
-                                Keyingi<i class="fas fa-chevron-right ms-2"></i>
-                            </button>
+                            @if($index !== count($testResult->questions) - 1)
+                                <button type="button" class="user-btn user-btn-primary" id="next-btn">
+                                    Keyingi<i class="fas fa-chevron-right ms-2"></i>
+                                </button>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -220,7 +279,7 @@
 
 @section('scripts')
 <script>
-let timeRemaining = {{ ($testResult->test->duration_minutes * 60) - $testResult->started_at->diffInSeconds(now()) }};
+let timeRemaining = Math.floor({{ ($testResult->test->duration_minutes * 60) - $testResult->started_at->diffInSeconds(now()) }});
 let timerInterval;
 let currentQuestion = 0;
 const totalQuestions = {{ count($testResult->questions) }};
@@ -267,7 +326,12 @@ function showQuestion(index) {
     const nextBtn = document.getElementById('next-btn');
     
     if (prevBtn) prevBtn.disabled = index === 0;
-    if (nextBtn) nextBtn.disabled = index === totalQuestions - 1;
+    
+    // Oxirgi savolda next tugmasi yo'q, shuning uchun hech narsa qilmaymiz
+    // Faqat mavjud tugmani tekshiramiz va enabled qilamiz
+    if (nextBtn) {
+        nextBtn.disabled = false;
+    }
     
     // Question navigation'dagi current holatini yangilash
     document.querySelectorAll('.question-item').forEach(item => {
@@ -283,6 +347,7 @@ function showQuestion(index) {
 
 // Navigation tugmalari
 document.addEventListener('click', function(e) {
+    // Next button click handling
     if (e.target.id === 'next-btn' || e.target.closest('#next-btn')) {
         if (currentQuestion < totalQuestions - 1) {
             showQuestion(currentQuestion + 1);
@@ -343,9 +408,15 @@ function saveAnswer(questionId, answer) {
     .then(data => {
         if (data.success) {
             // Question navigation'da javob berilganini ko'rsatish
-            const questionIndex = document.querySelector(`[data-question-id="${questionId}"]`).dataset.questionIndex;
-            const navigationItem = document.querySelector(`[data-question-index="${questionIndex}"]`);
-            navigationItem.classList.add('answered');
+            const questionCard = document.querySelector(`[data-question-id="${questionId}"]`);
+            if (questionCard) {
+                const questionIndex = questionCard.dataset.questionIndex;
+                const navigationItem = document.querySelector(`.question-item[data-question-index="${questionIndex}"]`);
+                if (navigationItem && !navigationItem.classList.contains('answered')) {
+                    navigationItem.classList.add('answered');
+                    console.log(`Question ${parseInt(questionIndex) + 1} marked as answered`); // Debug log
+                }
+            }
             
             // Progress'ni yangilash
             updateProgress();
@@ -381,10 +452,13 @@ document.addEventListener('keydown', function(e) {
     // 1-4 raqamlar bilan javob tanlash
     if (['1', '2', '3', '4'].includes(e.key)) {
         const optionIndex = parseInt(e.key) - 1;
-        const currentCard = document.querySelector('.question-card-modern.active');
-        const options = currentCard.querySelectorAll('.option-btn');
-        if (options[optionIndex]) {
-            options[optionIndex].click();
+        const currentCard = document.querySelector('.user-card.d-block[data-question-index]');
+        if (currentCard) {
+            const options = currentCard.querySelectorAll('.option-btn');
+            if (options[optionIndex]) {
+                options[optionIndex].click();
+                e.preventDefault();
+            }
         }
     }
 });
@@ -395,7 +469,28 @@ window.addEventListener('beforeunload', function(e) {
     e.returnValue = 'Test jarayonida. Rostdan ham chiqmoqchimisiz?';
 });
 
+// Initialize question navigation states
+function initializeNavigationStates() {
+    // Mark already answered questions in navigation
+    document.querySelectorAll('.question-item').forEach(item => {
+        const questionIndex = parseInt(item.dataset.questionIndex);
+        const questionCard = document.querySelector(`[data-question-index="${questionIndex}"]`);
+        
+        if (questionCard) {
+            const hasSelectedOption = questionCard.querySelector('.option-btn.selected');
+            if (hasSelectedOption && !item.classList.contains('answered')) {
+                item.classList.add('answered');
+                console.log(`Question ${questionIndex + 1} initialized as answered`); // Debug log
+            }
+        }
+    });
+    
+    // Update initial progress
+    updateProgress();
+}
+
 // Initial setup
+initializeNavigationStates();
 showQuestion(0);
 </script>
 @endsection

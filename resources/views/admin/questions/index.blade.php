@@ -1,26 +1,28 @@
-@extends('layouts.purpose-admin')
+@extends('layouts.admin')
 
 @section('title', 'Savollar')
 @section('description', 'Test savollarini boshqarish')
 
 @section('content')
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <div>
-        <h1 class="purpose-header-title mb-1">
-            <i class="fas fa-question-circle me-3"></i>Savollar
-        </h1>
-        <p class="purpose-text-muted">Test savollarini boshqarish va tahrirlash</p>
+<div class="page-header">
+    <div class="row align-items-center">
+        <div class="col">
+            <h1 class="h3 mb-1">Savollar</h1>
+            <p class="text-muted mb-0">Test savollarini boshqarish va tahrirlash</p>
+        </div>
+        <div class="col-auto">
+            <a href="{{ route('admin.questions.create') }}" class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>Yangi savol
+            </a>
+        </div>
     </div>
-    <a href="{{ route('admin.questions.create') }}" class="purpose-btn purpose-btn-primary">
-        <i class="fas fa-plus me-2"></i>Yangi savol
-    </a>
 </div>
 
-<div class="purpose-card purpose-fade-in">
-    <div class="purpose-card-body p-0">
+<div class="card">
+    <div class="card-body p-0">
         @if($questions->count() > 0)
             <div class="table-responsive">
-                <table class="table purpose-table mb-0">
+                <table class="table mb-0">
                     <thead>
                         <tr>
                             <th width="80">#</th>
@@ -42,22 +44,22 @@
                                     <div class="fw-semibold">{{ Str::limit($question->question, 60) }}</div>
                                 </td>
                                 <td>
-                                    <span class="purpose-badge purpose-badge-info">
+                                    <span class="badge bg-info">
                                         <i class="fas fa-folder me-1"></i>{{ $question->category->name }}
                                     </span>
                                 </td>
                                 <td class="text-center">
-                                    <span class="purpose-badge purpose-badge-success">
+                                    <span class="badge bg-success">
                                         {{ strtoupper($question->correct_answer) }}
                                     </span>
                                 </td>
                                 <td>
                                     @if($question->is_active)
-                                        <span class="purpose-badge purpose-badge-success">
+                                        <span class="badge bg-success">
                                             <i class="fas fa-check me-1"></i>Faol
                                         </span>
                                     @else
-                                        <span class="purpose-badge purpose-badge-danger">
+                                        <span class="badge bg-secondary">
                                             <i class="fas fa-times me-1"></i>Nofaol
                                         </span>
                                     @endif
@@ -66,20 +68,20 @@
                                     <span class="text-muted">{{ $question->created_at->format('d.m.Y') }}</span>
                                 </td>
                                 <td>
-                                    <div class="purpose-table-actions">
+                                    <div class="btn-group btn-group-sm">
                                         <a href="{{ route('admin.questions.show', $question) }}" 
-                                           class="purpose-action-btn purpose-action-btn-primary" title="Ko'rish">
+                                           class="btn btn-outline-primary" title="Ko'rish">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                         <a href="{{ route('admin.questions.edit', $question) }}" 
-                                           class="purpose-action-btn purpose-action-btn-success" title="Tahrirlash">
+                                           class="btn btn-outline-warning" title="Tahrirlash">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <form method="POST" action="{{ route('admin.questions.destroy', $question) }}" 
-                                              style="display: inline;">
+                                              class="d-inline">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="purpose-action-btn purpose-action-btn-danger" title="O'chirish"
+                                            <button type="submit" class="btn btn-outline-danger" title="O'chirish"
                                                     onclick="return confirm('Rostdan ham o\'chirmoqchimisiz?')">
                                                 <i class="fas fa-trash"></i>
                                             </button>
@@ -99,11 +101,11 @@
         @else
             <div class="text-center py-5">
                 <div class="mb-4">
-                    <i class="fas fa-question-circle" style="font-size: 4rem; color: #e5e7eb;"></i>
+                    <i class="fas fa-question-circle fa-4x text-muted"></i>
                 </div>
-                <h3 class="purpose-text-muted mb-3">Hozircha savollar yo'q</h3>
-                <p class="purpose-text-muted mb-4">Birinchi savolni yaratish uchun quyidagi tugmani bosing</p>
-                <a href="{{ route('admin.questions.create') }}" class="purpose-btn purpose-btn-primary">
+                <h3 class="text-muted mb-3">Hozircha savollar yo'q</h3>
+                <p class="text-muted mb-4">Birinchi savolni yaratish uchun quyidagi tugmani bosing</p>
+                <a href="{{ route('admin.questions.create') }}" class="btn btn-primary">
                     <i class="fas fa-plus me-2"></i>Birinchi savolni yarating
                 </a>
             </div>

@@ -1,9 +1,18 @@
-@extends('layouts.purpose-admin')
+@extends('layouts.admin')
 
 @section('title', 'Dashboard')
 @section('description', 'Tizim statistikalari va tezkor ma\'lumotlar')
 
 @section('content')
+<div class="page-header">
+    <div class="row align-items-center">
+        <div class="col">
+            <h1 class="h3 mb-1">Dashboard</h1>
+            <p class="text-muted mb-0">Tizim statistikalari va tezkor ma'lumotlar</p>
+        </div>
+    </div>
+</div>
+
 <style>
     .dashboard-stats {
         margin-bottom: 2rem;

@@ -1,31 +1,41 @@
-@extends('layouts.purpose-admin')
+@extends('layouts.admin')
 
 @section('title', 'Savol Tahrirlash')
 @section('description', 'Savol ma\'lumotlarini o\'zgartirish')
 
 @section('content')
-<div class="purpose-form-container purpose-fade-in">
-    <div class="purpose-form-card">
-        <div class="purpose-form-header">
-            <div class="purpose-form-icon">
-                <i class="fas fa-edit"></i>
-            </div>
-            <h1 class="purpose-form-title">Savol Tahrirlash</h1>
-            <p class="purpose-form-subtitle">Savol #{{ $question->id }} ma'lumotlarini o'zgartiring</p>
+<div class="page-header">
+    <div class="row align-items-center">
+        <div class="col">
+            <h1 class="h3 mb-1">Savol Tahrirlash</h1>
+            <p class="text-muted mb-0">Savol #{{ $question->id }} ma'lumotlarini o'zgartirish</p>
         </div>
-        
-        <div class="purpose-form-body">
+        <div class="col-auto">
+            <a href="{{ route('admin.questions.index') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Orqaga
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-10 offset-lg-1">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Savol ma'lumotlari</h5>
+            </div>
+            <div class="card-body">
             <form method="POST" action="{{ route('admin.questions.update', $question) }}">
                 @csrf
                 @method('PUT')
 
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="purpose-form-group">
-                            <label for="category_id" class="purpose-form-label">
-                                Kategoriya <span class="purpose-required">*</span>
+                        <div class="mb-3">
+                            <label for="category_id" class="form-label">
+                                Kategoriya <span class="text-danger">*</span>
                             </label>
-                            <select class="form-control purpose-form-control @error('category_id') is-invalid @enderror" 
+                            <select class="form-control @error('category_id') is-invalid @enderror" 
                                     id="category_id" name="category_id" required>
                                 <option value="">Kategoriyani tanlang</option>
                                 @foreach($categories as $category)
@@ -36,16 +46,16 @@
                                 @endforeach
                             </select>
                             @error('category_id')
-                                <div class="purpose-invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="purpose-form-group">
-                            <label for="correct_answer" class="purpose-form-label">
-                                To'g'ri javob <span class="purpose-required">*</span>
+                        <div class="mb-3">
+                            <label for="correct_answer" class="form-label">
+                                To'g'ri javob <span class="text-danger">*</span>
                             </label>
-                            <select class="form-control purpose-form-control @error('correct_answer') is-invalid @enderror" 
+                            <select class="form-control @error('correct_answer') is-invalid @enderror" 
                                     id="correct_answer" name="correct_answer" required>
                                 <option value="">To'g'ri javobni tanlang</option>
                                 <option value="a" {{ old('correct_answer', $question->correct_answer) === 'a' ? 'selected' : '' }}>A</option>
@@ -54,49 +64,49 @@
                                 <option value="d" {{ old('correct_answer', $question->correct_answer) === 'd' ? 'selected' : '' }}>D</option>
                             </select>
                             @error('correct_answer')
-                                <div class="purpose-invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
                 </div>
 
-                <div class="purpose-form-group">
-                    <label for="question" class="purpose-form-label">
-                        Savol matni <span class="purpose-required">*</span>
+                <div class="mb-3">
+                    <label for="question" class="form-label">
+                        Savol matni <span class="text-danger">*</span>
                     </label>
-                    <textarea class="form-control purpose-form-control @error('question') is-invalid @enderror" 
+                    <textarea class="form-control @error('question') is-invalid @enderror" 
                               id="question" name="question" rows="4" required 
                               placeholder="Savol matnini kiriting...">{{ old('question', $question->question) }}</textarea>
                     @error('question')
-                        <div class="purpose-invalid-feedback">{{ $message }}</div>
+                        <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <!-- Answer Options -->
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="purpose-form-group">
-                            <label for="option_a" class="purpose-form-label d-flex align-items-center">
-                                <span class="purpose-badge purpose-badge-primary me-2">A</span> Birinchi variant <span class="purpose-required">*</span>
+                        <div class="mb-3">
+                            <label for="option_a" class="form-label d-flex align-items-center">
+                                <span class="badge bg-primary me-2">A</span> Birinchi variant <span class="text-danger">*</span>
                             </label>
-                            <input type="text" class="form-control purpose-form-control answer-option @error('option_a') is-invalid @enderror" 
+                            <input type="text" class="form-control answer-option @error('option_a') is-invalid @enderror" 
                                    id="option_a" name="option_a" value="{{ old('option_a', $question->option_a) }}" required 
                                    placeholder="A variantini kiriting">
                             @error('option_a')
-                                <div class="purpose-invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="purpose-form-group">
-                            <label for="option_b" class="purpose-form-label d-flex align-items-center">
-                                <span class="purpose-badge purpose-badge-info me-2">B</span> Ikkinchi variant <span class="purpose-required">*</span>
+                        <div class="mb-3">
+                            <label for="option_b" class="form-label d-flex align-items-center">
+                                <span class="badge bg-info me-2">B</span> Ikkinchi variant <span class="text-danger">*</span>
                             </label>
-                            <input type="text" class="form-control purpose-form-control answer-option @error('option_b') is-invalid @enderror" 
+                            <input type="text" class="form-control answer-option @error('option_b') is-invalid @enderror" 
                                    id="option_b" name="option_b" value="{{ old('option_b', $question->option_b) }}" required 
                                    placeholder="B variantini kiriting">
                             @error('option_b')
-                                <div class="purpose-invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
@@ -104,55 +114,56 @@
 
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="purpose-form-group">
-                            <label for="option_c" class="purpose-form-label d-flex align-items-center">
-                                <span class="purpose-badge purpose-badge-warning me-2">C</span> Uchinchi variant <span class="purpose-required">*</span>
+                        <div class="mb-3">
+                            <label for="option_c" class="form-label d-flex align-items-center">
+                                <span class="badge bg-warning me-2">C</span> Uchinchi variant <span class="text-danger">*</span>
                             </label>
-                            <input type="text" class="form-control purpose-form-control answer-option @error('option_c') is-invalid @enderror" 
+                            <input type="text" class="form-control answer-option @error('option_c') is-invalid @enderror" 
                                    id="option_c" name="option_c" value="{{ old('option_c', $question->option_c) }}" required 
                                    placeholder="C variantini kiriting">
                             @error('option_c')
-                                <div class="purpose-invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="purpose-form-group">
-                            <label for="option_d" class="purpose-form-label d-flex align-items-center">
-                                <span class="purpose-badge purpose-badge-success me-2">D</span> To'rtinchi variant <span class="purpose-required">*</span>
+                        <div class="mb-3">
+                            <label for="option_d" class="form-label d-flex align-items-center">
+                                <span class="badge bg-success me-2">D</span> To'rtinchi variant <span class="text-danger">*</span>
                             </label>
-                            <input type="text" class="form-control purpose-form-control answer-option @error('option_d') is-invalid @enderror" 
+                            <input type="text" class="form-control answer-option @error('option_d') is-invalid @enderror" 
                                    id="option_d" name="option_d" value="{{ old('option_d', $question->option_d) }}" required 
                                    placeholder="D variantini kiriting">
                             @error('option_d')
-                                <div class="purpose-invalid-feedback">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>
                 </div>
 
-                <div class="purpose-checkbox">
-                    <div class="d-flex align-items-center">
-                        <input class="purpose-checkbox-input form-check-input" type="checkbox" id="is_active" name="is_active" value="1" 
+                <div class="mb-3">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="is_active" name="is_active" value="1" 
                                {{ old('is_active', $question->is_active) ? 'checked' : '' }}>
-                        <label class="purpose-checkbox-label" for="is_active">
+                        <label class="form-check-label" for="is_active">
                             <strong>Faol savol</strong>
-                            <br><small class="purpose-text-muted">Bu savol testlarda ko'rsatilishi mumkin</small>
+                            <br><small class="text-muted">Bu savol testlarda ko'rsatilishi mumkin</small>
                         </label>
                     </div>
                 </div>
 
-                <div class="purpose-form-actions">
-                    <a href="{{ route('admin.questions.index') }}" class="purpose-btn purpose-btn-secondary">
+                <div class="d-flex justify-content-end">
+                    <a href="{{ route('admin.questions.index') }}" class="btn btn-secondary me-2">
                         <i class="fas fa-arrow-left"></i>
                         Orqaga
                     </a>
-                    <button type="submit" class="purpose-btn purpose-btn-primary">
+                    <button type="submit" class="btn btn-primary">
                         <i class="fas fa-save"></i>
                         Yangilash
                     </button>
                 </div>
             </form>
+            </div>
         </div>
     </div>
 </div>

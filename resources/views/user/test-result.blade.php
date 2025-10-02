@@ -136,8 +136,14 @@
                     </div>
                     <div class="col-md-6">
                         <div class="user-card stat-item text-center">
-                            <div class="stat-number text-info">{{ $testResult->started_at->diffInMinutes($testResult->finished_at) }}</div>
-                            <div class="stat-label">Sarflangan vaqt (daqiqa)</div>
+                            @php
+                                $totalSeconds = $testResult->started_at->diffInSeconds($testResult->finished_at);
+                                $minutes = intval($totalSeconds / 60);
+                                $seconds = $totalSeconds % 60;
+                                $timeDisplay = sprintf('%d:%02d', $minutes, $seconds);
+                            @endphp
+                            <div class="stat-number text-info">{{ $timeDisplay }}</div>
+                            <div class="stat-label">Sarflangan vaqt (minut:sekund)</div>
                         </div>
                     </div>
                 </div>

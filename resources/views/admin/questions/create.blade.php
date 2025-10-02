@@ -1,4 +1,4 @@
-@extends('layouts.purpose-admin')
+@extends('layouts.admin')
 
 @section('title', 'Yangi Savol')
 @section('description', 'Yangi savol yaratish')

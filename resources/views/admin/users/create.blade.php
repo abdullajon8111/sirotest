@@ -1,18 +1,28 @@
-@extends('layouts.purpose-admin')
+@extends('layouts.admin')
 
 @section('title', 'Yangi foydalanuvchi yaratish')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h4 class="mb-0">Yangi foydalanuvchi yaratish</h4>
-                    <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">
-                        <i class="fas fa-arrow-left"></i> Orqaga
-                    </a>
-                </div>
+<div class="page-header">
+    <div class="row align-items-center">
+        <div class="col">
+            <h1 class="h3 mb-1">Yangi foydalanuvchi yaratish</h1>
+            <p class="text-muted mb-0">Tizimga yangi foydalanuvchi qo'shish</p>
+        </div>
+        <div class="col-auto">
+            <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Orqaga
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8 offset-lg-2">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Foydalanuvchi ma'lumotlari</h5>
+            </div>
                 
                 <div class="card-body">
                     <form action="{{ route('admin.users.store') }}" method="POST">
@@ -101,7 +111,6 @@
                             </button>
                         </div>
                     </form>
-                </div>
             </div>
         </div>
     </div>

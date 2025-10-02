@@ -1,20 +1,29 @@
-@extends('layouts.purpose-admin')
+@extends('layouts.admin')
 
 @section('title', 'Foydalanuvchini tahrirlash')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                    <h4 class="mb-0">Foydalanuvchini tahrirlash</h4>
-                    <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">
-                        <i class="fas fa-arrow-left"></i> Orqaga
-                    </a>
-                </div>
-                
-                <div class="card-body">
+<div class="page-header">
+    <div class="row align-items-center">
+        <div class="col">
+            <h1 class="h3 mb-1">Foydalanuvchini tahrirlash</h1>
+            <p class="text-muted mb-0">{{ $user->name }} ning ma'lumotlarini o'zgartirish</p>
+        </div>
+        <div class="col-auto">
+            <a href="{{ route('admin.users.index') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Orqaga
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-8 offset-lg-2">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Foydalanuvchi ma'lumotlari</h5>
+            </div>
+            <div class="card-body">
                     <form action="{{ route('admin.users.update', $user) }}" method="POST">
                         @csrf
                         @method('PUT')
