@@ -3,25 +3,19 @@
 @section('title', 'Testni tahrirlash')
 
 @section('content')
-<div class="page-header">
-    <div class="row align-items-center">
-        <div class="col">
-            <h1 class="h3 mb-1">Testni tahrirlash</h1>
-            <p class="text-muted mb-0">{{ $test->title }} testini o'zgartirish</p>
+<div class="">
+    <div class="card shadow-sm">
+        <div class="card-header bg-warning text-dark">
+            <div class="d-flex align-items-center">
+                <i class="fas fa-edit me-3 fs-4"></i>
+                <div>
+                    <h4 class="mb-0">Testni tahrirlash</h4>
+                    <small class="opacity-75">{{ $test->title }} testini o'zgartirish</small>
+                </div>
+            </div>
         </div>
-        <div class="col-auto">
-            <a href="{{ route('admin.tests.index') }}" class="btn btn-secondary">
-                <i class="fas fa-arrow-left"></i> Orqaga
-            </a>
-        </div>
-    </div>
-</div>
 
-<div class="card">
-    <div class="card-header">
-        <h5 class="mb-0">Test ma'lumotlari</h5>
-    </div>
-    <div class="card-body">
+        <div class="card-body">
                     <form action="{{ route('admin.tests.update', $test) }}" method="POST">
                         @csrf
                         @method('PUT')
@@ -148,27 +142,29 @@
                             @enderror
                         </div>
                         
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" 
-                                       type="checkbox" 
-                                       id="is_active" 
-                                       name="is_active" 
-                                       value="1"
-                                       {{ old('is_active', $test->is_active) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="is_active">
-                                    Aktiv
-                                </label>
-                            </div>
+                        <div class="form-check mb-4">
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   id="is_active"
+                                   name="is_active"
+                                   value="1"
+                                   {{ old('is_active', $test->is_active) ? 'checked' : '' }}>
+                            <label class="form-check-label" for="is_active">
+                                <strong>Aktiv test</strong>
+                                <br><small class="text-muted">Bu test foydalanuvchilarga ko'rsatiladi</small>
+                            </label>
                         </div>
                         
-                        <div class="d-flex justify-content-end">
-                            <a href="{{ route('admin.tests.index') }}" class="btn btn-secondary me-2">Bekor qilish</a>
-                            <button type="submit" class="btn btn-primary">
+                        <div class="d-flex gap-2 justify-content-end">
+                            <a href="{{ route('admin.tests.index') }}" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left"></i> Orqaga
+                            </a>
+                            <button type="submit" class="btn btn-warning">
                                 <i class="fas fa-save"></i> Yangilash
                             </button>
                         </div>
                     </form>
+        </div>
     </div>
 </div>
 @endsection
