@@ -31,13 +31,35 @@ class TestController extends Controller
             'end_time' => 'required|date|after:start_time',
             'max_attempts' => 'required|integer|min:1',
             'is_active' => 'boolean',
-            'categories' => 'required|array',
-            'categories.*' => 'required|integer|min:1'
+            'categories' => 'required|array|min:1',
+            'categories.*.category_id' => 'required|integer|exists:categories,id',
+            'categories.*.question_count' => 'required|integer|min:1'
         ]);
 
+        // Transform the categories data
         $categoriesQuestions = [];
-        foreach ($validated['categories'] as $categoryId => $count) {
-            $categoriesQuestions[$categoryId] = $count;
+        foreach ($validated['categories'] as $category) {
+            if (isset($category['category_id']) && isset($category['question_count'])) {
+                // Check if category has enough questions
+                $categoryModel = Category::find($category['category_id']);
+                $maxQuestions = $categoryModel->activeQuestions()->count();
+                
+                if ($category['question_count'] > $maxQuestions) {
+                    return redirect()->back()
+                        ->withErrors(['categories' => "Kategoriya '{$categoryModel->name}' da faqat {$maxQuestions} ta faol savol bor."])
+                        ->withInput();
+                }
+                
+                $categoriesQuestions[$category['category_id']] = $category['question_count'];
+            }
+        }
+
+        // Check for duplicate categories
+        $categoryIds = array_keys($categoriesQuestions);
+        if (count($categoryIds) !== count(array_unique($categoryIds))) {
+            return redirect()->back()
+                ->withErrors(['categories' => 'Bir xil kategoriya ikki marta tanlanmasligi kerak.'])
+                ->withInput();
         }
 
         $testData = $validated;
@@ -71,13 +93,35 @@ class TestController extends Controller
             'end_time' => 'required|date|after:start_time',
             'max_attempts' => 'required|integer|min:1',
             'is_active' => 'boolean',
-            'categories' => 'required|array',
-            'categories.*' => 'required|integer|min:1'
+            'categories' => 'required|array|min:1',
+            'categories.*.category_id' => 'required|integer|exists:categories,id',
+            'categories.*.question_count' => 'required|integer|min:1'
         ]);
 
+        // Transform the categories data
         $categoriesQuestions = [];
-        foreach ($validated['categories'] as $categoryId => $count) {
-            $categoriesQuestions[$categoryId] = $count;
+        foreach ($validated['categories'] as $category) {
+            if (isset($category['category_id']) && isset($category['question_count'])) {
+                // Check if category has enough questions
+                $categoryModel = Category::find($category['category_id']);
+                $maxQuestions = $categoryModel->activeQuestions()->count();
+                
+                if ($category['question_count'] > $maxQuestions) {
+                    return redirect()->back()
+                        ->withErrors(['categories' => "Kategoriya '{$categoryModel->name}' da faqat {$maxQuestions} ta faol savol bor."])
+                        ->withInput();
+                }
+                
+                $categoriesQuestions[$category['category_id']] = $category['question_count'];
+            }
+        }
+
+        // Check for duplicate categories
+        $categoryIds = array_keys($categoriesQuestions);
+        if (count($categoryIds) !== count(array_unique($categoryIds))) {
+            return redirect()->back()
+                ->withErrors(['categories' => 'Bir xil kategoriya ikki marta tanlanmasligi kerak.'])
+                ->withInput();
         }
 
         $testData = $validated;
