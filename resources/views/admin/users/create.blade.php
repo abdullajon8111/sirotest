@@ -77,7 +77,7 @@
                         
                         <div class="mb-3">
                             <label for="role" class="form-label">Rol <span class="text-danger">*</span></label>
-                            <select class="form-control @error('role') is-invalid @enderror" 
+                            <select class="form-select @error('role') is-invalid @enderror" 
                                     id="role" 
                                     name="role" 
                                     required>

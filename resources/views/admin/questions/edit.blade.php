@@ -35,7 +35,7 @@
                             <label for="category_id" class="form-label">
                                 Kategoriya <span class="text-danger">*</span>
                             </label>
-                            <select class="form-control @error('category_id') is-invalid @enderror" 
+                            <select class="form-select @error('category_id') is-invalid @enderror" 
                                     id="category_id" name="category_id" required>
                                 <option value="">Kategoriyani tanlang</option>
                                 @foreach($categories as $category)
@@ -55,7 +55,7 @@
                             <label for="correct_answer" class="form-label">
                                 To'g'ri javob <span class="text-danger">*</span>
                             </label>
-                            <select class="form-control @error('correct_answer') is-invalid @enderror" 
+                            <select class="form-select @error('correct_answer') is-invalid @enderror" 
                                     id="correct_answer" name="correct_answer" required>
                                 <option value="">To'g'ri javobni tanlang</option>
                                 <option value="a" {{ old('correct_answer', $question->correct_answer) === 'a' ? 'selected' : '' }}>A</option>
