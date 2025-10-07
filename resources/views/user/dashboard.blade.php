@@ -34,7 +34,7 @@
                 </h5>
             </div>
             <div class="user-card-body">
-@if($availableTests->count() > 0)
+                @if($availableTests->count() > 0)
                     <div class="row">
                         @foreach($availableTests as $test)
                             <div class="col-md-6 mb-4">
@@ -42,13 +42,13 @@
                                     <div class="user-card-body">
                                         <div class="d-flex justify-content-between align-items-start mb-3">
                                             <h6 class="fw-bold mb-0">{{ $test->title }}</h6>
-                                            <span class="user-badge user-badge-primary">
+                                            <span class="user-badge user-badge-primary d-flex align-items-center">
                                                 <i class="fas fa-clock me-1"></i>{{ $test->duration_minutes }}m
                                             </span>
                                         </div>
-                                        
+
                                         <p class="text-muted mb-3 small">{{ Str::limit($test->description, 80) }}</p>
-                                        
+
                                         <div class="row g-2 mb-3">
                                             <div class="col-4">
                                                 <div class="text-center p-2 bg-light rounded">
@@ -69,7 +69,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+
                                         <a href="{{ route('user.test.show', $test) }}" class="user-btn user-btn-primary w-100">
                                             <i class="fas fa-play"></i>Testni boshlash
                                         </a>
@@ -117,7 +117,7 @@
                             </div>
                         </div>
                     @endforeach
-                    
+
                     <button class="user-btn user-btn-outline w-100 mt-2" onclick="alert('Bu funksiya keyingi versiyada qo\'shiladi')">
                         <i class="fas fa-chart-bar"></i>Batafsil statistika
                     </button>
@@ -130,7 +130,7 @@
                 @endif
             </div>
         </div>
-        
+
         <!-- Ma'lumot -->
         <div class="user-card">
             <div class="user-card-header">
@@ -145,21 +145,21 @@
                     </div>
                     <span class="text-muted">Test davomida vaqt chegaralanadi</span>
                 </div>
-                
+
                 <div class="d-flex align-items-center mb-3 p-2 rounded" style="transition: all 0.2s ease;" onmouseover="this.style.backgroundColor='rgba(45, 206, 137, 0.1)'" onmouseout="this.style.backgroundColor='transparent'">
                     <div class="bg-success bg-opacity-10 rounded-circle p-2 me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
                         <i class="fas fa-random text-success"></i>
                     </div>
                     <span class="text-muted">Savollar tasodifiy tartibda chiqadi</span>
                 </div>
-                
+
                 <div class="d-flex align-items-center mb-3 p-2 rounded" style="transition: all 0.2s ease;" onmouseover="this.style.backgroundColor='rgba(251, 99, 64, 0.1)'" onmouseout="this.style.backgroundColor='transparent'">
                     <div class="bg-warning bg-opacity-10 rounded-circle p-2 me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
                         <i class="fas fa-redo text-warning"></i>
                     </div>
                     <span class="text-muted">Testni belgilangan miqdorda takrorlash mumkin</span>
                 </div>
-                
+
                 <div class="d-flex align-items-center mb-0 p-2 rounded" style="transition: all 0.2s ease;" onmouseover="this.style.backgroundColor='rgba(17, 205, 239, 0.1)'" onmouseout="this.style.backgroundColor='transparent'">
                     <div class="bg-info bg-opacity-10 rounded-circle p-2 me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
                         <i class="fas fa-chart-pie text-info"></i>

@@ -26,17 +26,17 @@
         border-radius: 0.75rem;
         transition: all 0.2s ease;
     }
-    
+
     .stat-item:hover {
         transform: translateY(-2px);
     }
-    
+
     .stat-number {
         font-size: 2rem;
         font-weight: 700;
         margin-bottom: 0.5rem;
     }
-    
+
     .stat-label {
         color: var(--text-muted);
         font-weight: 500;
@@ -50,29 +50,29 @@
         transition: all 0.2s ease;
         background: var(--surface-white);
     }
-    
+
     .question-result-item.correct {
         border-left-color: var(--success-color);
         background: rgba(45, 206, 137, 0.1);
     }
-    
+
     .question-result-item.incorrect {
         border-left-color: var(--danger-color);
         background: rgba(239, 68, 68, 0.1);
     }
-    
+
     .question-result-item.unanswered {
         border-left-color: var(--warning-color);
         background: rgba(251, 99, 64, 0.1);
     }
-    
+
     .question-result-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 1rem;
     }
-    
+
     .question-number {
         background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
         color: white;
@@ -125,7 +125,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Time Information -->
                 <div class="row g-4 mt-3">
                     <div class="col-md-6">
@@ -158,7 +158,7 @@
         <a href="{{ route('user.dashboard') }}" class="user-btn user-btn-primary me-3">
             <i class="fas fa-arrow-left"></i>Dashboardga qaytish
         </a>
-        <button class="user-btn user-btn-outline" onclick="window.print()">
+        <button class="user-btn user-btn-outline d-none" onclick="window.print()">
             <i class="fas fa-print"></i>Chop etish
         </button>
     </div>
@@ -193,7 +193,7 @@
                                 @endif
                             </div>
                         </div>
-                        
+
                         <div class="mt-3 p-3 bg-light rounded">
                             <div class="row">
                                 <div class="col-md-6">
@@ -203,7 +203,7 @@
                                             @if($result['user_answer'])
                                                 <span class="{{ $result['is_correct'] ? 'text-success' : 'text-danger' }} fw-bold">
                                                     <i class="fas fa-arrow-right me-1"></i>
-                                                    {{ strtoupper($result['user_answer']) }}) 
+                                                    {{ strtoupper($result['user_answer']) }})
                                                     {{ $result['question']['option_' . $result['user_answer']] }}
                                                 </span>
                                             @else
@@ -215,7 +215,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 @if(!$result['is_correct'])
                                     <div class="col-md-6">
                                         <div class="mb-2">
@@ -223,7 +223,7 @@
                                             <div class="mt-1">
                                                 <span class="text-success fw-bold">
                                                     <i class="fas fa-check-circle me-1"></i>
-                                                    {{ strtoupper($result['correct_answer']) }}) 
+                                                    {{ strtoupper($result['correct_answer']) }})
                                                     {{ $result['question']['option_' . $result['correct_answer']] }}
                                                 </span>
                                             </div>

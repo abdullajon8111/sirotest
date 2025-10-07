@@ -10,6 +10,10 @@ class LoginController extends Controller
 {
     public function showLoginForm()
     {
+        if (\auth()->check()) {
+            $user = \auth()->user();
+        }
+
         return view('auth.login');
     }
 
@@ -24,7 +28,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             $user = Auth::user();
-            
+
             if (!$user->is_active) {
                 Auth::logout();
                 return redirect()->route('login')

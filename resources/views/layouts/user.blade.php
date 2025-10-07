@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Test Tizimi') - User Panel</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
+
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- User Layout CSS -->
     <link href="{{ asset('css/user-layout.css') }}" rel="stylesheet">
 </head>
@@ -34,19 +34,9 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('user.dashboard') ? 'active' : '' }}" 
+                            <a class="nav-link {{ request()->routeIs('user.dashboard') ? 'active' : '' }}"
                                href="{{ route('user.dashboard') }}">
                                 <i class="fas fa-home me-2"></i>Dashboard
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="alert('Testlar sahifasi keyingi versiyada qo\'shiladi')">
-                                <i class="fas fa-clipboard-check me-2"></i>Testlar
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" onclick="alert('Natijalar sahifasi keyingi versiyada qo\'shiladi')">
-                                <i class="fas fa-chart-line me-2"></i>Natijalar
                             </a>
                         </li>
                     </ul>
