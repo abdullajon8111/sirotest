@@ -51,13 +51,6 @@
                                 <span class="user-name">{{ auth()->user()->name }}</span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="#">
-                                    <i class="fas fa-user me-2"></i>Profil
-                                </a></li>
-                                <li><a class="dropdown-item" href="#">
-                                    <i class="fas fa-cog me-2"></i>Sozlamalar
-                                </a></li>
-                                <li><hr class="dropdown-divider"></li>
                                 <li>
                                     <form method="POST" action="{{ route('logout') }}" class="d-inline">
                                         @csrf
