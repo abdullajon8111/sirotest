@@ -18,8 +18,6 @@ Route::post('login', [LoginController::class, 'login']);
 
 // Admin Routes
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
-    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-
     Route::get('dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
     // Categories
@@ -47,4 +45,8 @@ Route::prefix('user')->middleware(['auth', 'user'])->group(function () {
     Route::post('test-result/{testResult}/answer', [TestTakingController::class, 'saveAnswer'])->name('user.test.answer');
     Route::post('test-result/{testResult}/finish', [TestTakingController::class, 'finish'])->name('user.test.finish');
     Route::get('test-result/{testResult}', [TestTakingController::class, 'result'])->name('user.test.result');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });

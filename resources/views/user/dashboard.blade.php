@@ -64,7 +64,7 @@
                                             </div>
                                             <div class="col-4">
                                                 <div class="text-center p-2 bg-light rounded">
-                                                    <div class="fw-bold text-warning">{{ $test->end_time->format('d.m') }}</div>
+                                                    <div class="fw-bold text-warning">{{ $test->end_time->format('d.m.Y') }}</div>
                                                     <small class="text-muted">Tugaydi</small>
                                                 </div>
                                             </div>
@@ -98,7 +98,7 @@
                 </h5>
             </div>
             <div class="user-card-body">
-@if($completedTests->count() > 0)
+            @if($completedTests->count() > 0)
                     @foreach($completedTests as $result)
                         <div class="p-3 bg-light rounded mb-3">
                             <div class="d-flex justify-content-between align-items-start">
@@ -125,7 +125,7 @@
                     <div class="text-center py-4">
                         <i class="fas fa-chart-bar fa-3x mb-3 text-muted" style="opacity: 0.5;"></i>
                         <h6 class="text-muted">Hali test topshirmadingiz</h6>
-                        <p class="text-muted mb-0">Birinchi testni topsiring</p>
+                        <p class="text-muted mb-0">Birinchi testni topshiring</p>
                     </div>
                 @endif
             </div>
@@ -139,7 +139,7 @@
                 </h5>
             </div>
             <div class="user-card-body">
-<div class="d-flex align-items-center mb-3 p-2 rounded" style="transition: all 0.2s ease;" onmouseover="this.style.backgroundColor='rgba(94, 114, 228, 0.1)'" onmouseout="this.style.backgroundColor='transparent'">
+                <div class="d-flex align-items-center mb-3 p-2 rounded" style="transition: all 0.2s ease;" onmouseover="this.style.backgroundColor='rgba(94, 114, 228, 0.1)'" onmouseout="this.style.backgroundColor='transparent'">
                     <div class="bg-primary bg-opacity-10 rounded-circle p-2 me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
                         <i class="fas fa-clock text-primary"></i>
                     </div>
